@@ -36,3 +36,6 @@ jobs:
 
       - name: Run diagnostics
         run: npm run doctor
+
+      - name: Check Vercel config is in sync
+        run: npm run vercel:check

@@ -17,9 +17,11 @@ MIT-licensed.
 ## Commands
 
 ```bash
-npm run dev      # start the dev server with hot reload
-npm run build    # build the static site
-npm run doctor   # diagnose config and content problems
+npm run dev          # start the dev server with hot reload
+npm run build        # build the static site
+npm run doctor       # diagnose config and content problems
+npm run vercel:sync  # refresh root vercel.json from dist/vercel.json
+npm run vercel:check # verify root vercel.json matches the build output
 ```
 
 `dev` and `build` run `scripts/check-node.mjs` first and fail on an unsupported Node
@@ -32,6 +34,7 @@ version. Run `nvm use` in this directory if the shell uses the wrong one.
 | `docs/`             | Content root; files become routes and sidebar entries       |
 | `blume.config.ts`   | Site configuration                                          |
 | `scripts/`          | Local Node helper scripts                                   |
+| `vercel.json`       | Vercel build settings, headers, and redirects               |
 | `.blume/`, `dist/`  | Generated output — never edit or commit                     |
 | `node_modules/`     | Dependencies — never edit                                   |
 
@@ -58,6 +61,11 @@ or invent CLI flags.
 - Keep frontmatter valid YAML; quote values containing `: `.
 - In `.mdx`, `{` and `<` are syntax. Escape them when they are meant as text.
 - Make focused changes. Do not reformat or rewrite unrelated files.
+- The site deploys as a static build on Vercel. `vercel.json` carries the build
+  settings, headers, and redirects; do not change the matching project settings in
+  the Vercel dashboard without updating the repository too. After configuration
+  changes that affect generated headers or redirects, run `npm run vercel:sync`
+  and commit the result.
 - Do not commit secrets, credentials, or local environment files.
 - If a task requires writing or restructuring knowledge-base content, confirm the intent
   first — that is outside the usual scope of agents in this repository.
@@ -80,4 +88,5 @@ Before reporting a task complete:
 1. `npm run build` succeeds.
 2. `npm run doctor` reports no new problems.
 3. Changed links and frontmatter are valid.
-4. No generated files or unrelated changes are included.
+4. `vercel.json` is in sync (`npm run vercel:check` after `npm run build`).
+5. No generated files or unrelated changes are included.
