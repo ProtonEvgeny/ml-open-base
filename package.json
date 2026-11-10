@@ -3,14 +3,16 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=22.19.0"
+    "node": "22.x"
   },
   "scripts": {
     "predev": "node scripts/check-node.mjs",
     "dev": "blume dev",
     "prebuild": "node scripts/check-node.mjs",
     "build": "blume build",
-    "doctor": "blume doctor"
+    "doctor": "blume doctor",
+    "vercel:sync": "node scripts/sync-vercel-config.mjs",
+    "vercel:check": "node scripts/sync-vercel-config.mjs --check"
   },
   "dependencies": {
     "blume": "^2.2.7"
