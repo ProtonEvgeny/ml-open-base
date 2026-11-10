@@ -62,6 +62,17 @@ or invent CLI flags.
 - If a task requires writing or restructuring knowledge-base content, confirm the intent
   first — that is outside the usual scope of agents in this repository.
 
+## Git and pull requests
+
+- Never push directly to `main`; every change goes through a short-lived branch and a
+  pull request. This applies to maintainers too.
+- Branch names follow `<type>/<kebab-slug>`; commit messages follow Conventional Commits
+  in English.
+- Keep one pull request to one logical change; do not mix content, tooling, and
+  infrastructure.
+- Before opening a pull request, run `npm run build` and `npm run doctor`.
+- Full human-facing policy: `CONTRIBUTING.md`.
+
 ## Definition of done
 
 Before reporting a task complete:
